@@ -8,7 +8,8 @@
    @Description:
 -------------------------------------------------
 """
-from ultralytics import YOLO
+# from ultralytics import YOLO
+from ultralytics.models import YOLO
 import streamlit as st
 import cv2
 from PIL import Image
@@ -62,10 +63,10 @@ def infer_uploaded_image(conf, model):
     :return: None
     """
     source_img = st.sidebar.file_uploader(
-        label="Choose an image...",
+        help="Upload an image for object detection",
+        label="上传需要检测的图像",
         type=("jpg", "jpeg", "png", 'bmp', 'webp')
     )
-
     col1, col2 = st.columns(2)
 
     with col1:
@@ -74,26 +75,27 @@ def infer_uploaded_image(conf, model):
             # adding the uploaded image to the page with caption
             st.image(
                 image=source_img,
-                caption="Uploaded Image",
+                caption="被检测图像",
                 use_column_width=True
             )
 
     if source_img:
-        if st.button("Execution"):
-            with st.spinner("Running..."):
+        if st.button("开始检测"):
+            with st.spinner("检测中..."):
                 res = model.predict(uploaded_image,
                                     conf=conf)
                 boxes = res[0].boxes
                 res_plotted = res[0].plot()[:, :, ::-1]
-
                 with col2:
                     st.image(res_plotted,
-                             caption="Detected Image",
+                             caption="图像检测结果",
                              use_column_width=True)
                     try:
-                        with st.expander("Detection Results"):
+                        with st.expander("检测结果详细信息"):
                             for box in boxes:
-                                st.write(box.xywh)
+                                st.write(box)
+
+                                # st.write(1)
                     except Exception as ex:
                         st.write("No image is uploaded yet!")
                         st.write(ex)
@@ -107,15 +109,14 @@ def infer_uploaded_video(conf, model):
     :return: None
     """
     source_video = st.sidebar.file_uploader(
-        label="Choose a video..."
+        label="上传你的视频",
     )
-
     if source_video:
         st.video(source_video)
 
     if source_video:
-        if st.button("Execution"):
-            with st.spinner("Running..."):
+        if st.button("开始检测"):
+            with st.spinner("检测中..."):
                 try:
                     tfile = tempfile.NamedTemporaryFile()
                     tfile.write(source_video.read())
@@ -146,7 +147,7 @@ def infer_uploaded_webcam(conf, model):
     """
     try:
         flag = st.button(
-            label="Stop running"
+            label="终止检测！"
         )
         vid_cap = cv2.VideoCapture(0)  # local camera
         st_frame = st.empty()

@@ -26,20 +26,21 @@ ROOT = root_path.relative_to(Path.cwd())
 
 
 # Source
-SOURCES_LIST = ["Image", "Video", "Webcam"]
+SOURCES_LIST = ["图像", "视频", "摄像头"]
 
 
 # DL model config
-DETECTION_MODEL_DIR = ROOT / 'weights' / 'detection'
-YOLOv8n = DETECTION_MODEL_DIR / "yolov8n.pt"
-YOLOv8s = DETECTION_MODEL_DIR / "yolov8s.pt"
-YOLOv8m = DETECTION_MODEL_DIR / "yolov8m.pt"
-YOLOv8l = DETECTION_MODEL_DIR / "yolov8l.pt"
-YOLOv8x = DETECTION_MODEL_DIR / "yolov8x.pt"
-
-DETECTION_MODEL_LIST = [
-    "yolov8n.pt",
-    "yolov8s.pt",
-    "yolov8m.pt",
-    "yolov8l.pt",
-    "yolov8x.pt"]
+# DETECTION_MODEL_DIR = ROOT / 'weights' / 'detection'
+# YOLOv8n = DETECTION_MODEL_DIR / "yolov8n.pt"
+# YOLOv8s = DETECTION_MODEL_DIR / "yolov8s.pt"
+# YOLOv8m = DETECTION_MODEL_DIR / "yolov8m.pt"
+# YOLOv8l = DETECTION_MODEL_DIR / "yolov8l.pt"
+# YOLOv8x = DETECTION_MODEL_DIR / "yolov8x.pt"
+best = r"D:\计算机设计大赛\YOLOV8AC\UI\YOLOv8-streamlit-app\best.pt"
+# DETECTION_MODEL_LIST = [
+#     "yolov8n.pt",
+#     "yolov8s.pt",
+#     "yolov8m.pt",
+#     "yolov8l.pt",
+#     "yolov8x.pt"]
+DETECTION_MODEL_LIST = ["best.pt"]
