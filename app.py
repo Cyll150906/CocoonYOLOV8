@@ -50,7 +50,7 @@ else:
 confidence = float(st.sidebar.slider(
     "设置执行度区间", 0, 100, 50)) / 100
 
-model_path = r"D:\计算机设计大赛\YOLOV8AC\UI\YOLOv8-streamlit-app\best.pt"
+model_path = r"best.pt"
 # if model_type:
 #     model_path = Path(config.DETECTION_MODEL_DIR, str(model_type))
 # else:
